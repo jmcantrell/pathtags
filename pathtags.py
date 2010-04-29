@@ -29,8 +29,8 @@ Examples of usage:
 
 __author__  = 'Jeremy Cantrell <jmcantrell@gmail.com>'
 __url__     = 'http://jmcantrell.me'
-__date__    = 'Thu 2009-02-26 21:25:25 (-0500)'
-__license__ = 'GPL'
+__date__    = 'Fri 2010-04-23 13:02:34 (-0400)'
+__license__ = 'BSD'
 
 import os
 from scriptutils.options import Options
