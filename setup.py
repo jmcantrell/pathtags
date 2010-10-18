@@ -4,7 +4,7 @@ from setuptools import setup
 
 setup(
         name='pathtags',
-        version='0.9.1',
+        version='0.9.2',
         description='File tagging system that uses the filesystem for storage.',
         author='Jeremy Cantrell',
         author_email='jmcantrell@gmail.com',
@@ -19,7 +19,6 @@ setup(
             ],
         install_requires=[
             'PathUtils',
-            'ScriptUtils',
             ],
         entry_points={
             'console_scripts': [

@@ -1,18 +1,17 @@
-You will need to install PathUtils, ScriptUtils, and PIL:
+Installation
+------------
 
-    apt-get install python-imaging
+If you have pip installed, you can install with:
 
-    easy_install pathutils
-    easy_install scriptutils
+    $ pip install pathtags
 
-To install for yourself only (~/bin will need to be in your PATH):
+If you have setuptools installed, you can install with:
 
-    ./install
+    $ easy_install pathtags
 
-To install for everyone:
+Otherwise, you'll have to download the package and run:
 
-    sudo ./install /usr/bin
+    python setup.py install
 
-Once installed, to get help with basic usage and available options:
-
-    pathtags -h
+If you install it this way then you will also have to install all necessary
+dependencies manually.

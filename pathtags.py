@@ -28,29 +28,29 @@ Examples of usage:
 """ #}}}
 
 import os
-from scriptutils.options import Options
+from argparse import ArgumentParser
 from pathutils import tagging
 
 def get_options(): #{{{1
-    opts = Options(args='[file...]')
-    opts.add_option('-d', '--directory', metavar='PATH', default='.', help='Use PATH as the tag directory.')
-    opts.add_option('-t', '--tag', action='append', help='Add TAG to tags.')
-    g = opts.add_option_group('Actions')
-    g.add_option('-a', '--add-tags', action='store_true', help='Add TAGS to filename.')
-    g.add_option('-r', '--remove-tags', action='store_true', help='Remove TAGS from filename.')
-    g.add_option('--list-tags', action='store_true', help='List tags.')
-    g.add_option('--list-paths', action='store_true', help='List paths.')
-    g.add_option('--repair', metavar='PATH', help='Repair tag using PATH as the source.')
+    opts = ArgumentParser(description="File tagging system that uses the filesystem for storage.")
+    opts.add_argument('files', metavar='FILE', help="a file to use for tagging")
+    opts.add_argument('-d', '--directory', metavar='PATH', default='.', help='use PATH as the tag directory')
+    opts.add_argument('-t', '--tag', action='append', help='add TAG to tags')
+    opts.add_argument('-a', '--add-tags', action='store_true', help='add TAGS to filename')
+    opts.add_argument('-r', '--remove-tags', action='store_true', help='remove TAGS from filename')
+    opts.add_argument('--list-tags', action='store_true', help='list tags')
+    opts.add_argument('--list-paths', action='store_true', help='list paths')
+    opts.add_argument('--repair', metavar='PATH', help='repair tag using PATH as the source')
     return opts.parse_args()
 
 def main(): #{{{1
-    opts, args = get_options()
+    opts = get_options()
     pt = tagging.PathTags(opts.directory)
     if opts.repair:
         pt.repair(opts.repair)
     if opts.list_tags:
-        if args:
-            tags = sum((pt.get_tags(p) for p in args), [])
+        if opts.files:
+            tags = sum((pt.get_tags(p) for p in opts.files), [])
         else:
             tags = pt.get_tags()
         print os.linesep.join(sorted(set(tags)))
@@ -61,11 +61,11 @@ def main(): #{{{1
             paths = pt.get_paths()
         print os.linesep.join(sorted(set(paths)))
     else:
-        if opts.tag and len(args):
+        if opts.tag and len(opts.files):
             if opts.add_tags:
-                for p in args: pt.add_tags(p, opts.tag)
+                for p in opts.files: pt.add_tags(p, opts.tag)
             if opts.remove_tags:
-                for p in args: pt.remove_tags(p, opts.tag)
+                for p in opts.files: pt.remove_tags(p, opts.tag)
     pt.write()
 
 #}}}
