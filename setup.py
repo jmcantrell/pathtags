@@ -19,6 +19,7 @@ setup(
             ],
         install_requires=[
             'PathUtils',
+            'ScriptUtils',
             ],
         entry_points={
             'console_scripts': [
