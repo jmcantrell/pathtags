@@ -1,7 +1,5 @@
 #!/usr/bin/env python
 
-# DOCUMENTATION {{{
-
 """File tagging system that uses the filesystem for storage
 
 Examples of usage:
@@ -25,13 +23,14 @@ Examples of usage:
     and a tag repair can be attempted:
         pathtags -d ~/tags --repair /path/to/search/for/files/*
 
-""" #}}}
+"""
 
 import os
 from scriptutils.arguments import Arguments
 from pathutils import tagging
 
-def get_arguments(): #{{{1
+
+def get_arguments():
     a = Arguments(description="File tagging system that uses the filesystem for storage.")
     a.add_argument('files', metavar='FILE', help="a file to use for tagging")
     a.add_argument('-d', '--directory', metavar='PATH', default='.', help='use PATH as the tag directory')
@@ -43,7 +42,8 @@ def get_arguments(): #{{{1
     a.add_argument('--repair', metavar='PATH', help='repair tag using PATH as the source')
     return a.parse_args()
 
-def main(): #{{{1
+
+def main():
     args = get_arguments()
     pt = tagging.PathTags(args.directory)
     if args.repair:
@@ -63,11 +63,13 @@ def main(): #{{{1
     else:
         if args.tag and len(args.files):
             if args.add_tags:
-                for p in args.files: pt.add_tags(p, args.tag)
+                for p in args.files:
+                    pt.add_tags(p, args.tag)
             if args.remove_tags:
-                for p in args.files: pt.remove_tags(p, args.tag)
+                for p in args.files:
+                    pt.remove_tags(p, args.tag)
     pt.write()
 
-#}}}
 
-if __name__ == '__main__': main()
+if __name__ == '__main__':
+    main()
