@@ -5,7 +5,7 @@ from setuptools import setup
 setup(
 
     name='pathtags',
-    version='0.9.2',
+    version='0.9.3',
 
     description='File tagging system that uses the filesystem for storage.',
 
